@@ -32,7 +32,7 @@ const MyHome = () => {
           {/* Section header */}
           <div className="text-center">
             <h1 className="text-7xl md:text-8xl font-extrabold leading-tight mb-4" data-aos="zoom-y-out">
-              <PreviewLink href="/About">[[Wang Zhao]]</PreviewLink>'s Blog
+              <PreviewLink href="/About">[[Zhao Wang]]</PreviewLink>'s Blog
             </h1>
             <div className="max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">
