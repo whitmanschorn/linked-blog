@@ -4,13 +4,11 @@ import DateFormatter from "../misc/date-formatter"
 type Props = {
   author?: Author,
   dateCreated?: string,
-  dateModified?: string
 }
 
 const PostMeta = ({
   author,
   dateCreated,
-  dateModified
 }: Props) => {
   if (!(author || dateCreated)) return null;
   return (
@@ -35,12 +33,6 @@ const PostMeta = ({
           {dateCreated && (
             <span className="text-gray-600">
               🗓 <DateFormatter dateString={dateCreated} />
-            </span>
-          )}
-          {dateCreated && dateModified && <span className="text-gray-600"> · </span>}
-          {dateModified && (
-            <span className="text-gray-600">
-              📝 <DateFormatter dateString={dateModified} />
             </span>
           )}
         </div>

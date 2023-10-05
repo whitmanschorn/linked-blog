@@ -50,7 +50,6 @@ export default function Post({ post, backlinks }: Props) {
             title={post.title}
             content={post.content}
             dateCreated={post.dateCreated}
-            dateModified={post.dateModified}
             author={post.author}
             backlinks={backlinks}
           />
@@ -73,7 +72,6 @@ export async function getStaticProps({ params }: Params) {
     'title',
     'excerpt',
     'dateCreated',
-    'dateModified',
     'slug',
     'author',
     'content',

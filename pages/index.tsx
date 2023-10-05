@@ -28,13 +28,12 @@ const pageSize = 6;
 const filterPosts = (posts: any[]) => {
   return posts
     //.filter((post) => post.slug.startsWith('posts/'))
-    .sort((post1, post2) => (post1.dateModified > post2.dateModified ? -1 : 1))
+    .sort((post1, post2) => (post1.dateCreated > post2.dateCreated ? -1 : 1))
 }
 export const getStaticProps = async () => {
   let posts = await getAllPosts([
     'title',
     'dateCreated',
-    'dateModified',
     'slug',
     'author',
     'coverImage',

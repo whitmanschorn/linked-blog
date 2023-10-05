@@ -28,7 +28,6 @@ function PostList({ posts }: Props) {
                   key={post.slug}
                   title={post.title}
                   dateCreated={post.dateCreated}
-                  dateModified={post.dateModified}
                   excerpt={post.excerpt}
                   author={post.author}
                   slug={post.slug}

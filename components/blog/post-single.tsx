@@ -8,7 +8,6 @@ type Props = {
   title: string,
   content: string,
   dateCreated?: string,
-  dateModified?: string,
   author?: Author,
   backlinks: { [k: string]: {
       title: string,
@@ -20,7 +19,6 @@ type Props = {
 function PostSingle({
   title,
   dateCreated,
-  dateModified,
   author,
   content,
   backlinks

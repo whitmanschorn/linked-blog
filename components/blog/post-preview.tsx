@@ -5,7 +5,6 @@ import PostMeta from "./post-meta"
 type Props = {
   title: string
   dateCreated?: string
-  dateModified?: string
   excerpt: string
   author?: Author
   slug: string
@@ -14,7 +13,6 @@ type Props = {
 const PostPreview = ({
   title,
   dateCreated,
-  dateModified,
   excerpt,
   author,
   slug,
@@ -31,7 +29,7 @@ const PostPreview = ({
           {excerpt.slice(0, 500)}
         </div>
         <footer className="text-sm">
-          <PostMeta dateCreated={dateCreated} dateModified={dateModified} author={author} />
+          <PostMeta dateCreated={dateCreated} author={author} />
         </footer>
       </div>
       <Link as={`/${slug}`} href="/[...slug]" className="block shrink-0 ml-6">

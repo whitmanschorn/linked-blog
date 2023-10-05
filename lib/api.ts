@@ -48,11 +48,6 @@ function parseFileToObj(pathToObj: string) {
   } else if (typeof data['dateCreated'] !== 'undefined') {
     data['dateCreated'] = data['dateCreated'].toString()
   }
-  if (typeof data['dateModified'] === 'object') {
-    data['dateModified'] = data['dateModified']?.toISOString()
-  } else if (typeof data['dateModified'] !== 'undefined') {
-    data['dateModified'] = data['dateModified'].toString()
-  }
   return data
 }
 
