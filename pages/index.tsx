@@ -41,7 +41,7 @@ export const getStaticProps = async () => {
   ]);
   posts = filterPosts(posts);
   const pid = 1
-  const maxPid = Math.round(posts.length / pageSize)
+  const maxPid = Math.ceil(posts.length / pageSize)
   const start = (pid - 1) * pageSize;
   posts = posts.slice(start, start + pageSize)
 
