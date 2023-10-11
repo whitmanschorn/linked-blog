@@ -1,16 +1,16 @@
 import { DefaultSeoProps } from "next-seo";
 
-const description = "Host your second brain with NextJS"
+const description = "My second brain"
 // See https://www.npmjs.com/package/next-seo for more options
 const config: DefaultSeoProps = {
-  titleTemplate: "%s | Zhao Wang's Blog",
-  defaultTitle: "Zhao Wang's Blog",
+  titleTemplate: "%s | Whitman Schorn's Working Memory",
+  defaultTitle: "Whitman Schorn's Working Memory",
   description,
 
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    title: "Zhao Wang's Blog",
+    title: "Whitman Schorn's Working Memory",
     description,
   },
   additionalLinkTags: [
