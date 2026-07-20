@@ -93,6 +93,11 @@ a:visited {
   margin: 0 0 1.2em 0;
 }
 
+/* PG has no heading tags at all. Sections are inline bold with one blank line
+   on each side:
+     ...to write or read it.<br /><br /><b>Design</b><br /><br />This kind of...
+   So: same size as body, bold, and symmetric 1.2em margins — not the larger
+   top-heavy spacing headings usually get. */
 .pg-column h1,
 .pg-column h2,
 .pg-column h3,
@@ -101,7 +106,7 @@ a:visited {
 .pg-column h6 {
   font-size: 1em;
   font-weight: bold;
-  margin: 1.6em 0 1.2em 0;
+  margin: 1.2em 0;
   line-height: normal;
 }
 
@@ -139,10 +144,21 @@ a:visited {
   margin: 0;
 }
 
+/* PG's blockquotes are bare <blockquote> with no attributes, so they render at
+   the browser default: indented on BOTH sides, no rule, no color shift. The
+   left-border treatment is a markdown convention, not his. */
 .pg-column blockquote {
-  margin: 0 0 1.2em 0;
-  padding-left: 1em;
-  border-left: 1px solid var(--pg-text);
+  margin: 1.2em 40px;
+  padding: 0;
+  border: 0;
+}
+
+/* 40px each side would eat most of a phone screen. */
+@media (max-width: 600px) {
+  .pg-column blockquote {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 
 .pg-column code,
