@@ -17,6 +17,12 @@ const config: DefaultSeoProps = {
     {
       rel: 'icon',
       type: 'image/png',
+      href: '/favicon/favicon-64x64.png',
+      sizes: '64x64'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
       href: '/favicon/favicon-32x32.png',
       sizes: '32x32'
     },
