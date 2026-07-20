@@ -12,6 +12,19 @@
   --pg-visited: #464646;
   --pg-width: 435px;
   --pg-size: 13px;
+
+  /* Sidebar palette, sampled pixel-by-pixel out of PG's bel-7.gif. The nav is
+     a stack of 21px cells: 2px #ccc + 1px #999 above the face, 1px #666 + 2px
+     #333 below it. That asymmetry is what reads as "raised". */
+  --pg-nav-face: #666699;
+  --pg-nav-face-lit: #7373a5;
+  --pg-nav-hi-1: #cccccc;
+  --pg-nav-hi-2: #999999;
+  --pg-nav-lo-1: #666666;
+  --pg-nav-lo-2: #333333;
+
+  /* Ghost wordmark, sampled from bel-8.gif: #f7f7fc letters on #fefefe. */
+  --pg-ghost-1: #f7f7fc;
 }
 
 html {
@@ -46,18 +59,29 @@ a:visited {
   color: var(--pg-visited);
 }
 
+/* PG's page is a 3-cell table: nav | 26px spacer gif | 435px text column. */
+.pg-page {
+  display: flex;
+  align-items: flex-start;
+}
+
 /* PG's column: fixed 435px, but never wider than the viewport. */
 .pg-column {
   width: var(--pg-width);
   max-width: 100%;
-  margin: 0;
-  padding: 26px 0 40px 26px;
+  margin: 0 0 0 26px;
+  padding: 26px 0 40px 0;
   box-sizing: content-box;
 }
 
 @media (max-width: 600px) {
+  .pg-page {
+    display: block;
+  }
+
   .pg-column {
     width: auto;
+    margin: 0;
     padding: 16px 16px 32px 16px;
     box-sizing: border-box;
   }
@@ -156,3 +180,146 @@ a:visited {
 .pg-column th {
   font-weight: bold;
 }
+
+/* ---------------------------------------------------------------------------
+ * Sidebar
+ *
+ * PG's nav is a single 69x357 GIF with an <area> imagemap over it. This is the
+ * same thing as real elements: focusable, zoomable, translatable, and the
+ * bevel is drawn rather than baked into pixels.
+ *
+ * Cell anatomy, top to bottom: 2px #ccc border, 1px #999 inset shadow, 15px
+ * face, 1px #666 inset shadow, 2px #333 border = 21px.
+ * ------------------------------------------------------------------------ */
+.pg-nav {
+  flex: none;
+  width: 69px;
+}
+
+.pg-nav a {
+  display: block;
+  box-sizing: border-box;
+  height: 21px;
+  padding: 0 4px;
+  border-top: 2px solid var(--pg-nav-hi-1);
+  border-bottom: 2px solid var(--pg-nav-lo-2);
+  border-left: 3px solid var(--pg-nav-hi-2);
+  border-right: 3px solid var(--pg-nav-lo-2);
+  box-shadow: inset 0 1px 0 var(--pg-nav-hi-2), inset 0 -1px 0 var(--pg-nav-lo-1);
+  background: var(--pg-nav-face);
+  color: #ffffff;
+  font: bold 10px/15px Verdana, Geneva, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+
+.pg-nav a:visited {
+  color: #ffffff;
+}
+
+/* Flip the bevel: highlight moves to the bottom, so the cell reads as pushed
+   in rather than standing out. Plus a 1px nudge along the light direction. */
+.pg-nav a:hover,
+.pg-nav a:focus-visible,
+.pg-nav a[aria-current='page'] {
+  border-top-color: var(--pg-nav-lo-2);
+  border-bottom-color: var(--pg-nav-hi-1);
+  border-left-color: var(--pg-nav-lo-2);
+  border-right-color: var(--pg-nav-hi-2);
+  box-shadow: inset 0 1px 0 var(--pg-nav-lo-1), inset 0 -1px 0 var(--pg-nav-hi-2);
+  background: var(--pg-nav-face-lit);
+  transform: translate(1px, 1px);
+}
+
+.pg-nav a:focus-visible {
+  outline: 1px dotted var(--pg-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .pg-nav {
+    width: auto;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pg-nav a {
+    flex: 0 0 auto;
+    height: 26px;
+    line-height: 20px;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Ghost wordmark
+ *
+ * PG's bel-8.gif is #f7f7fc letterforms on #fefefe — roughly 2% contrast, so
+ * it reads as a watermark you only half-notice. Here it's live text, which
+ * keeps it selectable and available to screen readers.
+ * ------------------------------------------------------------------------ */
+@property --g1 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #f7f7fc;
+}
+
+/* Selector is `a.pg-ghost`, not `.pg-ghost`: the base `a:link` rule is
+   specificity (0,1,1) and would otherwise win, painting a link underline
+   across the wordmark. */
+a.pg-ghost {
+  --g1: var(--pg-ghost-1);
+  display: block;
+  margin: 0 0 1.2em 0;
+  font: bold clamp(15px, 5.6vw, 27px) / 45px Verdana, Geneva, sans-serif;
+  letter-spacing: 0.26em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--g1);
+  transition: --g1 120ms ease-out;
+}
+
+/* The only movement: linger on it and the ghost surfaces very slightly.
+   Registered via @property above so the color interpolates instead of
+   snapping. Nothing here animates on its own. */
+a.pg-ghost:hover,
+a.pg-ghost:focus-visible {
+  --g1: #ededf8;
+}
+
+/* ---------------------------------------------------------------------------
+ * Content
+ * ------------------------------------------------------------------------ */
+
+/* Body links thicken their underline rather than jumping color. */
+.pg-column main a {
+  text-underline-offset: 2px;
+  transition: text-decoration-thickness 120ms ease, text-underline-offset 120ms ease;
+}
+
+.pg-column main a:hover {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Respect the OS setting. Everything above is decoration; none of it carries
+ * meaning, so it can all be cut without loss.
+ * ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

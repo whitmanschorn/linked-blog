@@ -1,6 +1,6 @@
 import React from 'react'
-import Footer from './footer'
 import Header from './header'
+import Sidebar from './sidebar'
 
 type Props = {
   children: React.ReactNode
@@ -8,10 +8,12 @@ type Props = {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className="pg-column">
-      <Header />
-      <main>{children}</main>
-      <Footer />
+    <div className="pg-page">
+      <Sidebar />
+      <div className="pg-column">
+        <Header />
+        <main>{children}</main>
+      </div>
     </div>
   )
 }

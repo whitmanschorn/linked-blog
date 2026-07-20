@@ -1,18 +1,13 @@
-import Link from 'next/link'
 import { useState } from 'react'
+import GhostTitle from './ghost-title'
 import Search from './search'
 
 const Header = () => {
   const [searching, setSearching] = useState(false)
 
   return (
-    <header style={{ marginBottom: '1.6em' }}>
-      <b>
-        <Link href="/" aria-label="My Blog">
-          Whitman Schorn
-        </Link>
-      </b>
-      {' | '}
+    <header>
+      <GhostTitle />
       <a
         href="#"
         onClick={(e) => {
