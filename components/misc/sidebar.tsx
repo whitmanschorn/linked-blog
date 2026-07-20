@@ -17,7 +17,7 @@ const NAV = [
   { label: 'About', href: '/About' },
   { label: 'Books', href: '/Books' },
   { label: 'Cooking', href: '/Cooking' },
-  { label: 'Reading', href: '/2026 Reading List' },
+  { label: 'Media', href: '/yearly-media-list' },
   { label: 'Wikipedia', href: '/Wikipedia' },
   { label: 'Youtube', href: '/Youtube' },
 ]
