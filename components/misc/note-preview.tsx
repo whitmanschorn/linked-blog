@@ -3,11 +3,16 @@ type Props = {
   content: string
 }
 
+/*
+ * Visibility is controlled entirely by .note-preview rules in
+ * styles/additional-styles/utils.css — do not set `display` inline here, an
+ * inline style outranks the stylesheet and the preview can never hide.
+ */
 const NotePreview = ({ title, content }: Props) => {
   return (
-    <span className="note-preview block col-span-2 max-w-[400px] rounded shadow-sm p-5 bg-white cursor-pointer text-lg hover:bg-gray-200 hover:border-transparent">
-      <span className="block font-bold leading-snug tracking-tight truncate mb-1">{title}</span>
-      <span className="block font-normal text-gray-600 whitespace-pre-line max-h-[150px] truncate">{content}</span>
+    <span className="note-preview">
+      <b className="note-preview-title">{title}</b>
+      <span className="note-preview-body">{content}</span>
     </span>
   )
 }

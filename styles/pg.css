@@ -1,0 +1,158 @@
+/*
+ * Values taken verbatim from paulgraham.com's raw HTML:
+ *   <body bgcolor="#ffffff" text="#000000" link="#000099" vlink="#464646">
+ *   <table width="435"> ... <font size="2" face="verdana">
+ * HTML font size="2" renders at 13px against a 16px base.
+ */
+
+:root {
+  --pg-text: #000000;
+  --pg-bg: #ffffff;
+  --pg-link: #000099;
+  --pg-visited: #464646;
+  --pg-width: 435px;
+  --pg-size: 13px;
+}
+
+html {
+  background: var(--pg-bg);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--pg-bg);
+  color: var(--pg-text);
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: var(--pg-size);
+  line-height: normal;
+}
+
+/* The only concession to mobile: bump the type and let the column go fluid.
+   Verdana at 13px is unreadable on a phone. */
+@media (max-width: 600px) {
+  :root {
+    --pg-size: 15px;
+  }
+}
+
+a,
+a:link {
+  color: var(--pg-link);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--pg-visited);
+}
+
+/* PG's column: fixed 435px, but never wider than the viewport. */
+.pg-column {
+  width: var(--pg-width);
+  max-width: 100%;
+  margin: 0;
+  padding: 26px 0 40px 26px;
+  box-sizing: content-box;
+}
+
+@media (max-width: 600px) {
+  .pg-column {
+    width: auto;
+    padding: 16px 16px 32px 16px;
+    box-sizing: border-box;
+  }
+}
+
+/* Paragraph rhythm. PG uses literal <br><br> between paragraphs; one blank
+   line of the current line-height is the equivalent. */
+.pg-column p {
+  margin: 0 0 1.2em 0;
+}
+
+.pg-column h1,
+.pg-column h2,
+.pg-column h3,
+.pg-column h4,
+.pg-column h5,
+.pg-column h6 {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 1.6em 0 1.2em 0;
+  line-height: normal;
+}
+
+.pg-column > h1:first-child,
+.pg-column > *:first-child {
+  margin-top: 0;
+}
+
+.pg-column img {
+  max-width: 100%;
+  height: auto;
+}
+
+.pg-column hr {
+  border: 0;
+  border-top: 1px solid var(--pg-text);
+  margin: 1.6em 0;
+}
+
+.pg-column ul,
+.pg-column ol {
+  margin: 0 0 1.2em 0;
+  padding-left: 2em;
+}
+
+.pg-column ul {
+  list-style: disc;
+}
+
+.pg-column ol {
+  list-style: decimal;
+}
+
+.pg-column li {
+  margin: 0;
+}
+
+.pg-column blockquote {
+  margin: 0 0 1.2em 0;
+  padding-left: 1em;
+  border-left: 1px solid var(--pg-text);
+}
+
+.pg-column code,
+.pg-column pre,
+.pg-column tt {
+  font-family: monospace;
+  font-size: 1em;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+.pg-column pre {
+  margin: 0 0 1.2em 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.pg-column table {
+  border-collapse: collapse;
+  margin: 0 0 1.2em 0;
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.pg-column th,
+.pg-column td {
+  border: 1px solid var(--pg-text);
+  padding: 2px 6px;
+  text-align: left;
+  font-weight: normal;
+}
+
+.pg-column th {
+  font-weight: bold;
+}
